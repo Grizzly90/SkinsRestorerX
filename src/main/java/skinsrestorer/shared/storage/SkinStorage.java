@@ -175,7 +175,7 @@ public class SkinStorage {
 
         } else {
             //geyser compatibility
-            name = name.replaceAll("\\*", "·");
+            name = name.replaceAll("\\*", ".");
             File playerFile = new File(folder.getAbsolutePath() + File.separator + "Players" + File.separator + name + ".player");
 
             try {
@@ -296,7 +296,7 @@ public class SkinStorage {
             mysql.execute("DELETE FROM " + Config.MYSQL_PLAYERTABLE + " WHERE Nick=?", name);
         } else {
             //geyser compatibility
-            name = name.replaceAll("\\*", "·");
+            name = name.replaceAll("\\*", ".");
             File playerFile = new File(folder.getAbsolutePath() + File.separator + "Players" + File.separator + name + ".player");
 
             if (playerFile.exists())
@@ -339,7 +339,7 @@ public class SkinStorage {
                 mysql.execute("UPDATE " + Config.MYSQL_PLAYERTABLE + " SET Skin=? WHERE Nick=?", skin, name);
         } else {
             //geyser compatibility
-            name = name.replaceAll("\\*", "·");
+            name = name.replaceAll("\\*", ".");
             File playerFile = new File(folder.getAbsolutePath() + File.separator + "Players" + File.separator + name + ".player");
 
             try {
