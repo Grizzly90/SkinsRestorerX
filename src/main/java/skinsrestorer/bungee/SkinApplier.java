@@ -80,6 +80,7 @@ public class SkinApplier {
     public void applySkin(final String pname) throws Exception {
         ProxiedPlayer p = ProxyServer.getInstance().getPlayer(pname);
         applySkin(p, pname, null);
+        System.out.println("[SkinsRestorer] Test applySkin");
     }
 
     public void applySkin(final ProxiedPlayer p) throws Exception {

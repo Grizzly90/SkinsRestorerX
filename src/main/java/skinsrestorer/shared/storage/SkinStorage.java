@@ -112,6 +112,8 @@ public class SkinStorage {
     public Object getOrCreateSkinForPlayer(final String name, boolean silent) throws SkinRequestException {
         String skin = getPlayerSkin(name);
 
+        System.out.println("Skin from Storage: " + skin);
+
         if (skin == null) {
             skin = name.toLowerCase();
         }
@@ -119,9 +121,10 @@ public class SkinStorage {
         Object textures = getSkinData(skin);
 
         if (textures != null) {
+            System.out.println("Returning textures!");
             return textures;
         }
-
+        System.out.println("textures=NULL. No chached skin");
         // No cached skin found, get from MojangAPI, save and return
         try {
             textures = this.getMojangAPI().getSkinProperty(this.getMojangAPI().getUUID(skin));
@@ -158,6 +161,7 @@ public class SkinStorage {
             if (crs != null)
                 try {
                     String skin = crs.getString("Skin");
+                    System.out.println("skin ist: " + skin);
 
                     //maybe useless
                     if (skin.isEmpty()) {
@@ -171,11 +175,9 @@ public class SkinStorage {
                     e.printStackTrace();
                 }
 
-            return null;
-
         } else {
             //geyser compatibility
-            name = name.replaceAll("\\*", ".");
+            name = name.replaceAll("\\*", "-_");
             File playerFile = new File(folder.getAbsolutePath() + File.separator + "Players" + File.separator + name + ".player");
 
             try {
@@ -202,8 +204,8 @@ public class SkinStorage {
                 e.printStackTrace();
             }
 
-            return null;
         }
+        return null;
     }
 
     /**
@@ -296,7 +298,7 @@ public class SkinStorage {
             mysql.execute("DELETE FROM " + Config.MYSQL_PLAYERTABLE + " WHERE Nick=?", name);
         } else {
             //geyser compatibility
-            name = name.replaceAll("\\*", ".");
+            name = name.replaceAll("\\*", "-_");
             File playerFile = new File(folder.getAbsolutePath() + File.separator + "Players" + File.separator + name + ".player");
 
             if (playerFile.exists())
@@ -339,7 +341,7 @@ public class SkinStorage {
                 mysql.execute("UPDATE " + Config.MYSQL_PLAYERTABLE + " SET Skin=? WHERE Nick=?", skin, name);
         } else {
             //geyser compatibility
-            name = name.replaceAll("\\*", ".");
+            name = name.replaceAll("\\*", "-_");
             File playerFile = new File(folder.getAbsolutePath() + File.separator + "Players" + File.separator + name + ".player");
 
             try {

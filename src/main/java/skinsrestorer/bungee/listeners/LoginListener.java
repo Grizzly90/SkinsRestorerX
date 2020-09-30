@@ -50,6 +50,8 @@ public class LoginListener implements Listener {
                 // todo: add default skinurl support
                 plugin.getSkinApplier().applySkin(null, skin, (InitialHandler) connection);
             } catch (SkinRequestException ignored) {
+                System.out.println("Skin wurde nicht gesetzt");
+                ignored.printStackTrace();
             } catch (Exception e1) {
                 e1.printStackTrace();
             }
